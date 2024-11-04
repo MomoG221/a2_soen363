@@ -1,0 +1,130 @@
+Provide the DDL queries for creating the database tables that correspond
+entities and their relationships.
+Use internal integer primary keys (no TMDB/IMDB id).
+Include referential integrity / unique constraints.
+Include full country name and short code for countries.
+Create foreign tables for genres, content ratings, keywords:
+
+Movies type of request:
+
+import urllib.request
+import json
+with urllib.request.urlopen("https://api.watchmode.com/v1/title/345534/details/?apiKey=YOUR_API_KEY") as url:
+    data = json.loads(url.read().decode())
+    print(data)
+
+{
+  "id": 3173903,
+  "title": "Breaking Bad",
+  "original_title": "Breaking Bad",
+  "plot_overview": "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+  "type": "tv_series",
+  "runtime_minutes": 45,
+  "year": 2008,
+  "end_year": 2013,
+  "release_date": "2008-01-20",
+  "imdb_id": "tt0903747",
+  "tmdb_id": 1396,
+  "tmdb_type": "tv",
+  "genres": [7],
+  "genre_names": ["Drama"],
+  "user_rating": 9.2,
+  "critic_score": 85,
+  "us_rating": "TV-MA",
+}
+
+keywords type of request:
+import urllib.request
+import json
+with urllib.request.urlopen("https://api.watchmode.com/v1/search/?apiKey=YOUR_API_KEY&search_field=name&search_value=Ed%20Wood") as url:
+    data = json.loads(url.read().decode())
+    print(data)
+
+    {
+  "title_results": [
+    {
+      "id": 1114888,
+      "name": "Ed Wood",
+      "type": "movie",
+      "year": 1994,
+      "imdb_id": "tt0109707",
+      "tmdb_id": 522,
+      "tmdb_type": "movie"
+    }
+  ],
+  "people_results": [
+    {
+      "id": 710125611,
+      "name": "Ed Wood",
+      "main_profession": "cinematographer",
+      "imdb_id": "nm7903892",
+      "tmdb_id": 2901757
+    }
+  ]
+}
+
+genres type of request:
+import urllib.request
+import json
+with urllib.request.urlopen("https://api.watchmode.com/v1/genres/?apiKey=YOUR_API_KEY") as url:
+    data = json.loads(url.read().decode())
+    print(data)
+
+
+    [
+  { "id": 4, "name": "Comedy", "tmdb_id": 35 },
+  { "id": 6, "name": "Documentary", "tmdb_id": 99 },
+  { "id": 33, "name": "Anime", "tmdb_id": null }
+]
+
+countries type of request:
+import urllib.request
+import json
+with urllib.request.urlopen("https://api.watchmode.com/v1/regions/?apiKey=YOUR_API_KEY") as url:
+    data = json.loads(url.read().decode())
+    print(data)
+
+    [
+  {
+    "country": "US",
+    "name": "USA",
+    "flag": "https://cdn.watchmode.com/misc_images/icons/usFlag2.png",
+    "data_tier": 1,
+    "plan_enabled": true
+  },
+  {
+    "country": "CA",
+    "name": "Canada",
+    "flag": "https://cdn.watchmode.com/misc_images/icons/flagCA.png",
+    "data_tier": 1,
+    "plan_enabled": true
+  },
+  {
+    "country": "GB",
+    "name": "Great Britain",
+    "flag": "https://cdn.watchmode.com/misc_images/icons/flagGB.png",
+    "data_tier": 1,
+    "plan_enabled": true
+  },
+  {
+    "country": "AU",
+    "name": "Australia",
+    "flag": "https://cdn.watchmode.com/misc_images/icons/flagAU.png",
+    "data_tier": 1,
+    "plan_enabled": true
+  },
+  {
+    "country": "AR",
+    "name": "Argentina",
+    "flag": "https://cdn.watchmode.com/misc_images/icons/flagAR.png",
+    "data_tier": 2,
+    "plan_enabled": false
+  },
+  {
+    "country": "BE",
+    "name": "Belgium",
+    "flag": "https://cdn.watchmode.com/misc_images/icons/flagBE.png",
+    "data_tier": 2,
+    "plan_enabled": false
+  }
+]
