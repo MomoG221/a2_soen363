@@ -2,6 +2,8 @@ import requests
 import mysql.connector
 from mysql.connector import Error
 
+#api-key:BC3uLIJHXYUq3eoADfoXTLkoU1tJIoioAU5IyScK
+
 # Fetch data from API
 url = 'https://jsonplaceholder.typicode.com/posts'
 response = requests.get(url)
